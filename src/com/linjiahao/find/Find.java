@@ -3,6 +3,7 @@ import com.linjiahao.util.DoubleMap;
 import com.linjiahao.util.Union;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Set;
 public class Find {
 	private DoubleMap<String, String, Integer> doubleMap;
@@ -15,7 +16,9 @@ public class Find {
 		Union<ArrayList<String>, ArrayList<Double>> union = new Union<>(point, price);
 		point.add(startingPoint);
 		getNext(startingPoint, endPoint, union, 1);
-		return null;
+		String str = union.first.stream().reduce((string, s) -> string + " 到 " + s).orElse("");
+		double sumPrice = union.second.stream().mapToDouble(Double::doubleValue).sum();
+		return str + "，总价钱为：" + String.format("%.2f", sumPrice);
 	}
 	private void getNext(String startingPoint, String endPoint, Union<ArrayList<String>, ArrayList<Double>> union, int times) {
 		if (times > 17) {
@@ -39,5 +42,7 @@ public class Find {
 				item1.second = item2.second;
 			}
 		});
+		union.first = collect.first;
+		union.second = collect.second;
 	}
 }
