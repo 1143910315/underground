@@ -1,8 +1,12 @@
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
         DoubleMap<String, String, Integer> doubleMap = new DoubleMap<>();
+        //0.95
+        //0.6
         // 小北路线
         doubleMap.put("小北", "淘金", 2);
         doubleMap.put("小北", "区庄", 2);
@@ -93,26 +97,8 @@ public class Main {
         doubleMap.put("科韵路", "万胜围", 2);
         // 车陂南路线
         doubleMap.put("车陂南", "万胜围", 2);
+        Find find = new Find(doubleMap);
+        System.out.println(find.next("小北"));
     }
 }
 
-class DoubleMap<k1, k2, v> {
-    HashMap<k1, HashMap> hashMap = new HashMap<>();
-
-    public void put(k1 key1, k2 key2, v value) {
-        HashMap<k2, v> hashMapKey = hashMap.get(key1);
-        if (hashMapKey == null) {
-            hashMapKey = new HashMap<>();
-            hashMap.put(key1, hashMapKey);
-        }
-        hashMapKey.put(key2, value);
-    }
-
-    public v get(k1 key1, k2 key2) {
-        HashMap<k2, v> hashMapKey = hashMap.get(key1);
-        if (hashMapKey == null) {
-            return null;
-        }
-        return hashMapKey.get(key2);
-    }
-}
