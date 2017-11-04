@@ -1,8 +1,13 @@
 package com.linjiahao;
 import com.linjiahao.find.Find;
 import com.linjiahao.util.DoubleMap;
+import com.linjiahao.util.Union;
+
+import java.util.ArrayList;
+import java.util.Set;
 public class Main {
 	public static void main(String[] args) {
+
 		DoubleMap<String, String, Integer> doubleMap = new DoubleMap<>();
 		//0.95
 		//0.6
@@ -96,6 +101,19 @@ public class Main {
 		doubleMap.put("科韵路", "万胜围", 2);
 		// 车陂南路线
 		doubleMap.put("车陂南", "万胜围", 2);
+
+//		Set<String> key2Set = doubleMap.getKey2Set("小北");
+//		ArrayList<String> collect = key2Set.stream().collect(() -> {
+//			System.out.println(1);
+//			return new ArrayList<String>();
+//		}, (newUnion, item) -> {
+//			System.out.println(2);
+//			newUnion.add(item);
+//		}, (item1, item2) -> {
+//			System.out.println(item1);
+//			System.out.println(item2);
+//		});
+//		System.out.println(collect);
 		Find find = new Find(doubleMap);
 		System.out.println(find.next("小北","万胜围"));
 	}
